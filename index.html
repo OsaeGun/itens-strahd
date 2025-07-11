@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=MedievalSharp&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* Seus estilos CSS permanecem aqui (mantive o mesmo CSS que você tinha antes) */
         :root {
             --incomum: #4CAF50;
             --raro: #2196F3;
@@ -18,6 +19,8 @@
             --light-purple: #5d3a71;
             --gold: #e9c46a;
             --text-light: #e0d4c3;
+            --success: #4CAF50;
+            --danger: #f44336;
         }
         
         * {
@@ -42,6 +45,175 @@
             width: 100%;
         }
         
+        /* Seção de Login */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: rgba(26, 15, 33, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--light-purple);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .login-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+            text-shadow: 0 0 8px rgba(233, 196, 106, 0.5);
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-family: 'MedievalSharp', cursive;
+            color: var(--gold);
+            font-size: 0.95rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(58, 36, 66, 0.6);
+            border: 1px solid var(--light-purple);
+            border-radius: 6px;
+            color: var(--text-light);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            background: var(--light-purple);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--lendario) 0%, #F57C00 100%);
+            font-size: 1.1rem;
+            padding: 14px 20px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(93, 58, 113, 0.4);
+        }
+        
+        .user-type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .user-type-btn {
+            flex: 1;
+            padding: 12px;
+            background: var(--medium-purple);
+            border: 2px solid var(--light-purple);
+            color: #d4c4e4;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: 'MedievalSharp', cursive;
+        }
+        
+        .user-type-btn.active {
+            background: var(--light-purple);
+            color: #f8f0c6;
+            border-color: var(--gold);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+        
+        /* Barra de usuário logado */
+        .user-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(26, 15, 33, 0.8);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--light-purple);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--medium-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .user-name {
+            font-family: 'MedievalSharp', cursive;
+            color: var(--gold);
+        }
+        
+        .user-role {
+            background: var(--lendario);
+            color: #fff3e0;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .logout-btn {
+            background: var(--danger);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Conteúdo principal */
         header {
             text-align: center;
             padding: 20px 15px;
@@ -61,7 +233,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path fill="%235d3a7150" d="M12,2L2,7L12,12L22,7L12,2M2,17L12,22L22,17M2,12L12,17L22,12M12,7L2,12L12,17L22,12L12,7Z"/></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path fill="%235d3a7150" d="M12,2L2,7L12,12L22,7L12,2M2,17L12,22L22,17M2,12L12,17L22,12L12,7Z"/></svg>');
             opacity: 0.3;
             z-index: -1;
         }
@@ -364,166 +536,6 @@
             padding: 0 30px;
         }
         
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-family: 'MedievalSharp', cursive;
-            color: var(--gold);
-            font-size: 0.95rem;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            background: rgba(58, 36, 66, 0.6);
-            border: 1px solid var(--light-purple);
-            border-radius: 6px;
-            color: var(--text-light);
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.95rem;
-        }
-        
-        textarea.form-control {
-            min-height: 90px;
-            resize: vertical;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        
-        .form-row .form-group {
-            flex: 1 1 200px;
-        }
-        
-        .benefits-group {
-            margin-top: 8px;
-        }
-        
-        .benefit-item {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
-            align-items: center;
-        }
-        
-        .benefit-item input {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .add-benefit {
-            background: var(--medium-purple);
-            color: var(--text-light);
-            border: 1px solid var(--light-purple);
-            border-radius: 5px;
-            padding: 6px 10px;
-            cursor: pointer;
-            font-family: 'MedievalSharp', cursive;
-            margin-top: 5px;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .add-benefit:hover {
-            background: var(--light-purple);
-        }
-        
-        .remove-benefit {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .btn {
-            padding: 12px 20px;
-            background: var(--light-purple);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-family: 'MedievalSharp', cursive;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--lendario) 0%, #F57C00 100%);
-            font-size: 1.1rem;
-            padding: 14px 20px;
-            width: 100%;
-            margin-top: 10px;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(93, 58, 113, 0.4);
-        }
-        
-        .add-item-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--lendario) 0%, #F57C00 100%);
-            color: white;
-            font-size: 1.8rem;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            font-family: 'MedievalSharp', cursive;
-            color: #b8a7c1;
-            border-top: 1px solid var(--medium-purple);
-            font-size: 0.9rem;
-        }
-        
-        .edit-item-btn {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: rgba(0,0,0,0.5);
-            border: none;
-            color: white;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-        
         /* Estilos adicionados para o upload de imagem */
         .image-upload-container {
             display: flex;
@@ -598,6 +610,10 @@
             .form-row .form-group {
                 flex: 1 1 100%;
             }
+            
+            .login-box {
+                padding: 25px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -654,6 +670,16 @@
                 bottom: 15px;
                 right: 15px;
             }
+            
+            .user-bar {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .login-box {
+                padding: 20px;
+            }
         }
         
         @media (max-width: 350px) {
@@ -669,45 +695,103 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1><i class="fas fa-book-dead"></i> Grimório de Artefatos Mágicos</h1>
-            <p class="subtitle">Registro completo dos itens mágicos dos seus aventureiros de D&D 5e</p>
+        <!-- Seção de Login (visível apenas quando não logado) -->
+        <div id="login-section" class="login-container">
+            <div class="login-box">
+                <h2 class="login-title"><i class="fas fa-dragon"></i> Grimório de Artefatos</h2>
+                <p class="subtitle">Entre para acessar seus itens mágicos</p>
+                
+                <div class="user-type-selector">
+                    <div class="user-type-btn active" data-role="master">
+                        <i class="fas fa-crown"></i> Mestre
+                    </div>
+                    <div class="user-type-btn" data-role="player">
+                        <i class="fas fa-user"></i> Jogador
+                    </div>
+                </div>
+                
+                <form class="login-form">
+                    <div class="form-group">
+                        <label for="login-email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="login-email" class="form-control" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="button" id="login-btn" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Entrar no Grimório
+                        </button>
+                    </div>
+                    
+                    <div id="login-error" class="error-message" style="display: none;">
+                        Credenciais inválidas. Tente novamente.
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Conteúdo principal (visível apenas quando logado) -->
+        <div id="app-content" style="display: none;">
+            <!-- Barra de usuário -->
+            <div class="user-bar">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="user-name" id="current-user-name">Usuário</div>
+                        <div class="user-role" id="current-user-role">Jogador</div>
+                    </div>
+                </div>
+                <button id="logout-btn" class="btn logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </div>
             
-            <div class="player-filters">
-                <button class="player-btn active" data-player="all">
-                    <i class="fas fa-users"></i> Todos
-                </button>
-                <button class="player-btn" data-player="Deini">
-                    <i class="fas fa-shield-alt"></i> Deini
-                </button>
-                <button class="player-btn" data-player="Felipe">
-                    <i class="fas fa-mask"></i> Felipe
-                </button>
-                <button class="player-btn" data-player="Maki">
-                    <i class="fas fa-hat-wizard"></i> Maki
-                </button>
-                <button class="player-btn" data-player="Mauricio">
-                    <i class="fas fa-fire"></i> Mauricio
-                </button>
-            </div>
-        </header>
-        
-        <main>
-            <div class="items-grid" id="items-container">
-                <!-- Itens serão carregados aqui pelo JavaScript -->
-            </div>
-        </main>
-        
-        <footer>
-            <p>Grimório de Itens Mágicos - D&D 5e | © 2025 Alexandre - Curse of Sthrad</p>
-            <p>Os itens apresentados são fictícios e criados para fins de entretenimento</p>
-        </footer>
+            <header>
+                <h1><i class="fas fa-book-dead"></i> Grimório de Artefatos Mágicos</h1>
+                <p class="subtitle">Registro completo dos itens mágicos dos seus aventureiros de D&D 5e</p>
+                
+                <div class="player-filters">
+                    <button class="player-btn active" data-player="all">
+                        <i class="fas fa-users"></i> Todos
+                    </button>
+                    <button class="player-btn" data-player="Deini">
+                        <i class="fas fa-shield-alt"></i> Deini
+                    </button>
+                    <button class="player-btn" data-player="Felipe">
+                        <i class="fas fa-mask"></i> Felipe
+                    </button>
+                    <button class="player-btn" data-player="Maki">
+                        <i class="fas fa-hat-wizard"></i> Maki
+                    </button>
+                    <button class="player-btn" data-player="Mauricio">
+                        <i class="fas fa-fire"></i> Mauricio
+                    </button>
+                </div>
+            </header>
+            
+            <main>
+                <div class="items-grid" id="items-container">
+                    <!-- Itens serão carregados aqui pelo JavaScript -->
+                </div>
+            </main>
+            
+            <footer>
+                <p>Grimório de Itens Mágicos - D&D 5e | © 2025 Alexandre - Curse of Sthrad</p>
+                <p>Os itens apresentados são fictícios e criados para fins de entretenimento</p>
+            </footer>
+            
+            <!-- Botão para adicionar novo item (visível apenas para mestres) -->
+            <button class="add-item-btn" id="add-item-btn">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
     </div>
-    
-    <!-- Botão para adicionar novo item -->
-    <button class="add-item-btn" id="add-item-btn">
-        <i class="fas fa-plus"></i>
-    </button>
     
     <!-- Modal para adicionar/editar itens -->
     <div class="modal" id="item-modal">
@@ -759,7 +843,7 @@
                     <textarea id="item-description" class="form-control" required></textarea>
                 </div>
                 
-                <!-- Nova seção para upload de imagem -->
+                <!-- Seção para upload de imagem -->
                 <div class="form-group">
                     <label>Imagem do Item</label>
                     <div class="image-upload-container">
@@ -820,217 +904,53 @@
         </div>
     </div>
     
-    <script>
-        // Dados iniciais dos itens
-        const initialItems = [
-            // Itens do Deini
-            {
-                id: 1,
-                player: "Deini",
-                name: "Espada Alerta",
-                type: "Arma (espada longa), incomum",
-                rarity: "incomum",
-                description: "Esta espada parece sempre estar um passo à frente de seus inimigos. Sua lâmina brilha suavemente quando perigos se aproximam.",
-                benefits: [
-                    "Bônus de +1 na iniciativa",
-                    "O portador não pode ser surpreendido",
-                    "Vantagem em testes de Percepção para detectar ameaças"
-                ],
-                attunement: "sim",
-                image: "sword"
-            },
-            {
-                id: 2,
-                player: "Deini",
-                name: "Malho +1",
-                type: "Arma (martelo de guerra), incomum",
-                rarity: "incomum",
-                description: "Um martelo pesado com runas gravadas na cabeça que brilham com uma luz fraca quando golpeia.",
-                benefits: [
-                    "+1 de bônus de ataque e dano",
-                    "Causa dano adicional contra estruturas e objetos inanimados",
-                    "Uma vez por dia, pode causar tremor em área pequena"
-                ],
-                attunement: "nao",
-                image: "hammer"
-            },
-            {
-                id: 3,
-                player: "Deini",
-                name: "Manopla da Força do Ogro",
-                type: "Manopla, raro",
-                rarity: "raro",
-                description: "Esta manopla de couro reforçado com placas de ferro possui a força de um ogro.",
-                benefits: [
-                    "Aumenta a Força do portador para 19",
-                    "Permite arremessar objetos 50% mais pesados que o normal",
-                    "Vantagem em testes de Atletismo que envolvam força bruta"
-                ],
-                attunement: "sim",
-                image: "gauntlet"
-            },
-            {
-                id: 4,
-                player: "Deini",
-                name: "Bloodfury Tattoo",
-                type: "Tatuagem mágica, raro",
-                rarity: "raro",
-                description: "Uma tatuagem que brilha com uma luz vermelha intensa quando o portador entra em combate.",
-                benefits: [
-                    "Quando atinge 50% dos PV, ganha +2 de bônus de ataque",
-                    "Causa 1d6 de dano necrótico adicional em cada ataque",
-                    "Uma vez por dia, pode entrar em fúria como um bárbaro"
-                ],
-                attunement: "sim",
-                image: "tattoo"
-            },
-            
-            // Itens do Felipe
-            {
-                id: 5,
-                player: "Felipe",
-                name: "Ala do Andarilho da Morte",
-                type: "Armadura (couro), lendária",
-                rarity: "lendario",
-                description: "Esta capa negra como a noite é bordada com padrões que lembram asas de corvo. Permite que o usuário se transforme em uma nuvem de fumaça sombria.",
-                benefits: [
-                    "Permite voar a velocidade de 18m",
-                    "Torna-se intangível por 1 minuto (1x/dia)",
-                    "+2 na CA quando em áreas de escuridão",
-                    "Vantagem em testes de Furtividade à noite"
-                ],
-                attunement: "sim",
-                image: "cloak"
-            },
-            {
-                id: 6,
-                player: "Felipe",
-                name: "Luva da Ladinagem",
-                type: "Luva, rara",
-                rarity: "raro",
-                description: "Luva fina de couro preto que parece absorver a luz ao seu redor.",
-                benefits: [
-                    "+5 em testes de Prestidigitação",
-                    "Vantagem em testes de Furtividade",
-                    "Permite tentar abrir fechaduras como ação bônus"
-                ],
-                attunement: "sim",
-                image: "glove"
-            },
-            {
-                id: 7,
-                player: "Felipe",
-                name: "Manopla do Brigão Encrencado",
-                type: "Manopla, incomum",
-                rarity: "incomum",
-                description: "Manopla de aparência simples, mas que esconde um poder surpreendente para causar problemas.",
-                benefits: [
-                    "+1 de bônus em ataques desarmados",
-                    "Causa dano adicional em ataques surpresa",
-                    "Pode tentar empurrar criaturas maiores com vantagem"
-                ],
-                attunement: "nao",
-                image: "gauntlet"
-            },
-            {
-                id: 8,
-                player: "Felipe",
-                name: "Anel de Sinergia Arcana",
-                type: "Anel, raro",
-                rarity: "raro",
-                description: "Anel de prata com pequenos cristais que brilham quando magias são lançadas nas proximidades.",
-                benefits: [
-                    "+1 em testes de concentração para manter magias",
-                    "Reduz o custo de slots de magia para magias de ilusão",
-                    "Permite lançar 'Mãos Mágicas' à vontade"
-                ],
-                attunement: "sim",
-                image: "ring"
-            },
-            
-            // Itens do Maki
-            {
-                id: 9,
-                player: "Maki",
-                name: "Grimório Amaldiçoado de Bahamut",
-                type: "Grimório, lendário",
-                rarity: "lendario",
-                description: "Um grimório antigo encadernado em escamas de dragão que contém segredos proibidos sobre Bahamut.",
-                benefits: [
-                    "Permite aprender 2 magias adicionais de qualquer classe",
-                    "+2 na CD de magias de evocação",
-                    "Uma vez por dia, pode invocar a proteção de Bahamut",
-                    "Permite lançar 'Proteção contra o Mal e Bem' sem custo"
-                ],
-                attunement: "sim",
-                image: "book"
-            },
-            {
-                id: 10,
-                player: "Maki",
-                name: "Lanterna Feérica",
-                type: "Item maravilhoso, incomum",
-                rarity: "incomum",
-                description: "Pequena lanterna que emite luz de fadas, capaz de marcar inimigos com uma luz dourada.",
-                benefits: [
-                    "Emite luz brilhante em raio de 9m e penumbra em mais 9m",
-                    "Como ação, marca um alvo com luz feérica (vantagem em ataques)",
-                    "Criaturas feéricas têm desvantagem em testes contra o portador"
-                ],
-                attunement: "nao",
-                image: "lantern"
-            },
-            
-            // Itens do Mauricio
-            {
-                id: 11,
-                player: "Mauricio",
-                name: "Bordão Elemental",
-                type: "Arma (bastão), muito raro",
-                rarity: "muito-raro",
-                description: "Bastão feito de quatro tipos diferentes de madeira entrelaçados, cada um representando um elemento.",
-                benefits: [
-                    "Pode causar dano adicional de fogo, gelo, eletricidade ou ácido (1d8)",
-                    "+1 na CD de magias elementais",
-                    "Permite lançar 'Muralha de Fogo' 1x/dia"
-                ],
-                attunement: "sim",
-                image: "staff"
-            },
-            {
-                id: 12,
-                player: "Mauricio",
-                name: "Anel Ácido",
-                type: "Anel, raro",
-                rarity: "raro",
-                description: "Anel verde fosforescente que parece borbulhar lentamente.",
-                benefits: [
-                    "Imunidade a dano ácido",
-                    "Pode lançar 'Toque Ácido' 3x/dia",
-                    "Uma vez por dia, pode criar uma poça de ácido (3m de raio)"
-                ],
-                attunement: "sim",
-                image: "ring"
-            },
-            {
-                id: 13,
-                player: "Mauricio",
-                name: "Bracelete do Campeão de Avernus",
-                type: "Bracelete, lendário",
-                rarity: "lendario",
-                description: "Bracelete de ferro infernal com runas ardentes que concedem poder sobre o fogo.",
-                benefits: [
-                    "Resistência a dano de fogo",
-                    "+2 em testes de resistência contra magia",
-                    "Pode invocar uma arma flamejante 1x/dia",
-                    "Vantagem em testes de Intimidação contra demônios"
-                ],
-                attunement: "sim",
-                image: "bracer"
-            }
-        ];
-        
+    <!-- Firebase SDK com versão modular -->
+    <script type="module">
+        // Importar módulos do Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+        import { 
+            getFirestore, 
+            collection, 
+            getDocs, 
+            doc, 
+            setDoc, 
+            deleteDoc, 
+            writeBatch,
+            onSnapshot
+        } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+        // Configuração do Firebase (use suas credenciais)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAlOVIkqXGF2mLxE4IrOYmSvChUtNBN_aI",
+            authDomain: "itens-strahd.firebaseapp.com",
+            projectId: "itens-strahd",
+            storageBucket: "itens-strahd.firebasestorage.app",
+            messagingSenderId: "923792152854",
+            appId: "1:923792152854:web:7ed0d115d749960c97d837",
+            measurementId: "G-K3HLYLTZ0D"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
         // Elementos DOM
+        const loginSection = document.getElementById('login-section');
+        const appContent = document.getElementById('app-content');
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userTypeBtns = document.querySelectorAll('.user-type-btn');
+        const currentUserName = document.getElementById('current-user-name');
+        const currentUserRole = document.getElementById('current-user-role');
+        const loginError = document.getElementById('login-error');
+        
         const itemsContainer = document.getElementById('items-container');
         const playerButtons = document.querySelectorAll('.player-btn');
         const addItemBtn = document.getElementById('add-item-btn');
@@ -1051,23 +971,120 @@
         // Variáveis globais
         let currentItems = [];
         let editingItemId = null;
+        let currentUser = null;
+        let userRole = 'master'; // master ou player
+        
+        // Observar estado de autenticação
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                // Usuário logado
+                currentUser = user;
+                loginSection.style.display = 'none';
+                appContent.style.display = 'block';
+                currentUserName.textContent = user.email;
+                currentUserRole.textContent = userRole === 'master' ? 'Mestre' : 'Jogador';
+                
+                // Mostrar botão de adicionar apenas para mestres
+                addItemBtn.style.display = userRole === 'master' ? 'block' : 'none';
+                
+                // Carregar itens
+                loadItems();
+            } else {
+                // Usuário não logado
+                loginSection.style.display = 'flex';
+                appContent.style.display = 'none';
+                currentUser = null;
+            }
+        });
+        
+        // Seleção de tipo de usuário
+        userTypeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                userTypeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                userRole = btn.dataset.role;
+            });
+        });
+        
+        // Login
+        loginBtn.addEventListener('click', () => {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    loginError.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Erro de login:', error);
+                    loginError.style.display = 'block';
+                });
+        });
+        
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth);
+        });
+        
+        // Função para carregar itens do Firestore
+        async function loadItems() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "magicItems"));
+                currentItems = [];
+                querySnapshot.forEach((doc) => {
+                    currentItems.push({ id: doc.id, ...doc.data() });
+                });
+                renderItems();
+            } catch (error) {
+                console.error("Erro ao carregar itens:", error);
+                // Fallback para localStorage
+                const savedItems = localStorage.getItem('magicItems');
+                currentItems = savedItems ? JSON.parse(savedItems) : [];
+            }
+        }
+        
+        // Função para salvar itens no Firestore
+        async function saveItems() {
+            try {
+                const batch = writeBatch(db);
+                const colRef = collection(db, "magicItems");
+                
+                // Limpar coleção atual
+                const querySnapshot = await getDocs(colRef);
+                querySnapshot.forEach((doc) => {
+                    batch.delete(doc.ref);
+                });
+                
+                // Adicionar todos os itens atuais
+                currentItems.forEach(item => {
+                    const { id, ...data } = item;
+                    const docRef = doc(colRef, id);
+                    batch.set(docRef, data);
+                });
+                
+                await batch.commit();
+                localStorage.setItem('magicItems', JSON.stringify(currentItems));
+            } catch (error) {
+                console.error("Erro ao salvar itens:", error);
+                // Fallback para localStorage
+                localStorage.setItem('magicItems', JSON.stringify(currentItems));
+            }
+        }
         
         // Inicializar a aplicação
         function init() {
             loadItems();
             renderItems();
             setupEventListeners();
-        }
-        
-        // Carregar itens do localStorage ou usar os iniciais
-        function loadItems() {
-            const savedItems = localStorage.getItem('magicItems');
-            currentItems = savedItems ? JSON.parse(savedItems) : initialItems;
-        }
-        
-        // Salvar itens no localStorage
-        function saveItems() {
-            localStorage.setItem('magicItems', JSON.stringify(currentItems));
+            
+            // Ouvir mudanças em tempo real
+            const unsubscribe = onSnapshot(collection(db, "magicItems"), (snapshot) => {
+                currentItems = [];
+                snapshot.forEach((doc) => {
+                    currentItems.push({ id: doc.id, ...doc.data() });
+                });
+                renderItems(document.querySelector('.player-btn.active').dataset.player);
+            });
         }
         
         // Renderizar itens na tela
@@ -1106,16 +1123,12 @@
             
             let image = '';
             if (item.image.startsWith('data:image')) {
-                // Se for uma imagem em base64
                 image = item.image;
             } else if (item.image in imageTypes) {
-                // Se for uma das imagens padrão
                 image = imageTypes[item.image];
             } else if (item.image) {
-                // Se for uma URL
                 image = item.image;
             } else {
-                // Imagem padrão
                 image = imageTypes.book;
             }
             
@@ -1207,7 +1220,7 @@
             // Editar item (delegação de evento)
             itemsContainer.addEventListener('click', (e) => {
                 if (e.target.closest('.edit-item-btn')) {
-                    const itemId = parseInt(e.target.closest('.edit-item-btn').dataset.id);
+                    const itemId = e.target.closest('.edit-item-btn').dataset.id;
                     editItem(itemId);
                     document.body.style.overflow = 'hidden';
                 }
@@ -1327,38 +1340,26 @@
             
             // Preencher campos de imagem
             if (item.image.startsWith('data:image')) {
-                // Se for uma imagem em base64 (upload)
                 imageTypeUpload.checked = true;
                 toggleImageInput();
-                // Não podemos redefinir o input file, mas podemos mostrar a imagem
                 imagePreview.style.backgroundImage = `url('${item.image}')`;
                 imagePreview.innerHTML = '';
-            } else if (item.image in {
-                sword: 1, hammer: 1, gauntlet: 1, tattoo: 1, cloak: 1, 
-                glove: 1, ring: 1, book: 1, lantern: 1, staff: 1, bracer: 1
-            }) {
-                // Se for uma imagem padrão, usar o tipo padrão
+            } else if (item.image in imageTypes) {
                 imageTypeUrl.checked = true;
                 toggleImageInput();
                 imageUrlInput.value = '';
-                // Usaremos o placeholder padrão, pois não temos URL
-                imagePreview.style.backgroundImage = '';
-                if (!imagePreview.querySelector('.image-preview-placeholder')) {
-                    imagePreview.innerHTML = `
-                        <div class="image-preview-placeholder">
-                            <i class="fas fa-image"></i>
-                            <p>Imagem padrão será usada</p>
-                        </div>
-                    `;
-                }
+                imagePreview.innerHTML = `
+                    <div class="image-preview-placeholder">
+                        <i class="fas fa-image"></i>
+                        <p>Imagem padrão será usada</p>
+                    </div>
+                `;
             } else if (item.image) {
-                // Se for uma URL
                 imageTypeUrl.checked = true;
                 toggleImageInput();
                 imageUrlInput.value = item.image;
                 updateImagePreview();
             } else {
-                // Sem imagem
                 imageTypeUrl.checked = true;
                 toggleImageInput();
                 imageUrlInput.value = '';
@@ -1391,11 +1392,11 @@
         }
         
         // Manipular envio do formulário
-        function handleFormSubmit(e) {
+        async function handleFormSubmit(e) {
             e.preventDefault();
             
             // Obter valores do formulário
-            const id = editingItemId || Date.now();
+            const id = editingItemId || Date.now().toString();
             const name = document.getElementById('item-name').value;
             const player = document.getElementById('item-player').value;
             const type = document.getElementById('item-type').value;
@@ -1406,29 +1407,25 @@
             // Obter imagem do item
             let image = '';
             if (imageTypeUpload.checked && imageFileInput.files && imageFileInput.files[0]) {
-                // Se foi feito upload de uma imagem, converter para base64
                 const file = imageFileInput.files[0];
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    // Salvar o item após a imagem ser carregada
-                    saveItemWithImage(event.target.result, id, name, player, type, rarity, description, attunement);
+                    image = event.target.result;
+                    saveItem(id, name, player, type, rarity, description, attunement, image);
                 };
                 reader.readAsDataURL(file);
-                return; // Retornar aqui e continuar no callback
+                return;
             } else if (imageTypeUrl.checked && imageUrlInput.value) {
-                // Se foi usada uma URL
                 image = imageUrlInput.value;
             } else {
-                // Se nenhuma imagem foi fornecida, manter a imagem padrão
                 image = 'book';
             }
             
-            // Continuar o salvamento se não for upload de imagem
-            saveItemWithImage(image, id, name, player, type, rarity, description, attunement);
+            saveItem(id, name, player, type, rarity, description, attunement, image);
         }
         
-        // Função para salvar o item com a imagem
-        function saveItemWithImage(image, id, name, player, type, rarity, description, attunement) {
+        // Função para salvar o item
+        async function saveItem(id, name, player, type, rarity, description, attunement, image) {
             // Obter benefícios
             const benefits = [];
             document.querySelectorAll('.benefit-input').forEach(input => {
@@ -1461,7 +1458,7 @@
             }
             
             // Salvar e renderizar
-            saveItems();
+            await saveItems();
             renderItems(document.querySelector('.player-btn.active').dataset.player);
             
             // Fechar modal
