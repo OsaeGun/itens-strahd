@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=MedievalSharp&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* Seus estilos CSS permanecem aqui (mantive o mesmo CSS que você tinha antes) */
         :root {
             --incomum: #4CAF50;
             --raro: #2196F3;
@@ -311,6 +310,8 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            position: relative;
+            border: 2px solid var(--medium-purple);
         }
         
         .item-card:hover {
@@ -578,6 +579,56 @@
             margin-bottom: 8px;
         }
         
+        /* Botões de Ação */
+        .action-button {
+            background: linear-gradient(135deg, #8B4513 0%, #5D2906 100%);
+            border: 2px solid #e9c46a;
+            color: #f8f0c6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(135deg, #a0522d 0%, #6b3a1a 100%);
+        }
+
+        .edit-item-btn {
+            top: 8px;
+            left: 8px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e9c46a"><path d="M3 17.25v3.75h3.75l11.06-11.06-3.75-3.75-11.06 11.06zm17.71-10.21c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>');
+            background-size: 60%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .add-item-btn {
+            bottom: 20px;
+            right: 20px;
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e9c46a"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>');
+            background-size: 60%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Remover o ícone padrão do Font Awesome dos botões de ação */
+        .action-button i {
+            display: none;
+        }
+        
         /* Responsividade Mobile */
         @media (max-width: 768px) {
             .items-grid {
@@ -666,7 +717,6 @@
             .add-item-btn {
                 width: 50px;
                 height: 50px;
-                font-size: 1.5rem;
                 bottom: 15px;
                 right: 15px;
             }
@@ -787,7 +837,7 @@
             </footer>
             
             <!-- Botão para adicionar novo item (visível apenas para mestres) -->
-            <button class="add-item-btn" id="add-item-btn">
+            <button class="action-button add-item-btn" id="add-item-btn">
                 <i class="fas fa-plus"></i>
             </button>
         </div>
@@ -922,7 +972,8 @@
             setDoc, 
             deleteDoc, 
             writeBatch,
-            onSnapshot
+            onSnapshot,
+            addDoc
         } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
         // Configuração do Firebase (use suas credenciais)
@@ -1039,7 +1090,10 @@
                 console.error("Erro ao carregar itens:", error);
                 // Fallback para localStorage
                 const savedItems = localStorage.getItem('magicItems');
-                currentItems = savedItems ? JSON.parse(savedItems) : [];
+                if (savedItems) {
+                    currentItems = JSON.parse(savedItems);
+                    renderItems();
+                }
             }
         }
         
@@ -1073,8 +1127,6 @@
         
         // Inicializar a aplicação
         function init() {
-            loadItems();
-            renderItems();
             setupEventListeners();
             
             // Ouvir mudanças em tempo real
@@ -1157,7 +1209,7 @@
                         </span>
                     </div>
                 </div>
-                <button class="edit-item-btn" data-id="${item.id}">
+                <button class="action-button edit-item-btn" data-id="${item.id}">
                     <i class="fas fa-edit"></i>
                 </button>
             `;
@@ -1217,10 +1269,11 @@
             // Envio do formulário
             itemForm.addEventListener('submit', handleFormSubmit);
             
-            // Editar item (delegação de evento)
+            // Editar item (CORREÇÃO: usa closest para capturar o botão)
             itemsContainer.addEventListener('click', (e) => {
-                if (e.target.closest('.edit-item-btn')) {
-                    const itemId = e.target.closest('.edit-item-btn').dataset.id;
+                const editButton = e.target.closest('.edit-item-btn');
+                if (editButton) {
+                    const itemId = editButton.dataset.id;
                     editItem(itemId);
                     document.body.style.overflow = 'hidden';
                 }
@@ -1340,14 +1393,21 @@
             
             // Preencher campos de imagem
             if (item.image.startsWith('data:image')) {
+                // Se for uma imagem em base64 (upload)
                 imageTypeUpload.checked = true;
                 toggleImageInput();
+                // Não podemos redefinir o input file, mas podemos mostrar a imagem
                 imagePreview.style.backgroundImage = `url('${item.image}')`;
                 imagePreview.innerHTML = '';
-            } else if (item.image in imageTypes) {
+            } else if (item.image in {
+                sword: 1, hammer: 1, gauntlet: 1, tattoo: 1, cloak: 1, 
+                glove: 1, ring: 1, book: 1, lantern: 1, staff: 1, bracer: 1
+            }) {
+                // Se for uma imagem padrão, usar o tipo padrão
                 imageTypeUrl.checked = true;
                 toggleImageInput();
                 imageUrlInput.value = '';
+                // Usaremos o placeholder padrão, pois não temos URL
                 imagePreview.innerHTML = `
                     <div class="image-preview-placeholder">
                         <i class="fas fa-image"></i>
@@ -1355,11 +1415,13 @@
                     </div>
                 `;
             } else if (item.image) {
+                // Se for uma URL
                 imageTypeUrl.checked = true;
                 toggleImageInput();
                 imageUrlInput.value = item.image;
                 updateImagePreview();
             } else {
+                // Sem imagem
                 imageTypeUrl.checked = true;
                 toggleImageInput();
                 imageUrlInput.value = '';
